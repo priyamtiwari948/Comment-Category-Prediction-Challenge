@@ -1,8 +1,13 @@
 # Comment Category Prediction Challenge
 
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![LightGBM](https://img.shields.io/badge/Model-LightGBM-orange)
+![Macro F1](https://img.shields.io/badge/Macro%20F1-0.8302-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 **Kaggle Competition:** [comment-category-prediction-challenge](https://www.kaggle.com/competitions/comment-category-prediction-challenge)
 
-A machine learning pipeline that classifies online comments into one of four platform-defined handling categories, using text content, engagement signals, and metadata. Built as a Kaggle-style competition submission, evaluated on **Macro F1**. Three model families were trained and compared, with the best baseline selected as the final model.
+A machine learning pipeline that classifies online comments into one of four platform-defined handling categories, using text content, engagement signals, and metadata. Built as a Kaggle competition submission, evaluated on **Macro F1**. Three model families were trained and compared, with the best baseline selected as the final model.
 
 ## Overview
 
@@ -13,6 +18,10 @@ Social platforms tag comments into internal handling categories based on content
 - **Target:** `label` — 4 classes, heavily imbalanced (57.7% / 8.0% / 31.5% / 2.8%)
 - **Metric:** Macro F1
 - **Final result:** Validation Macro F1 = **0.8302** (LightGBM)
+
+## Pipeline architecture
+
+![Pipeline architecture](assets/pipeline_diagram.svg)
 
 ## Dataset
 
@@ -75,7 +84,7 @@ Three models were trained on the same feature matrix and compared:
 - LightGBM baseline was retained as-is (already outperformed both tuned linear models)
 
 **10. Model Selection**
-- All baseline and tuned scores compared side-by-side (bar charts included in notebook)
+- All baseline and tuned scores compared side-by-side (bar charts included in notebooks)
 - **LightGBM baseline selected as the final model** — clear margin over both linear/probabilistic alternatives
 
 **11. Prediction & Submission**
@@ -117,18 +126,31 @@ The model performs strongly on the majority classes (0 and 2) and reasonably on 
 ## Project Structure
 
 ```
-├── notebook.ipynb          # Full pipeline: EDA → feature engineering → 3-model comparison → tuning → final model → submission
-├── train.csv                # Training data (not included — see Kaggle competition)
-├── test.csv                 # Test data (not included — see Kaggle competition)
-├── sample_submission.csv    # Submission format reference
-└── submission.csv           # Final predictions
+├── notebooks/
+│   ├── 01_naive_bayes.ipynb      # Naive Bayes baseline + tuning
+│   ├── 02_sgd.ipynb              # SGD classifier baseline + tuning
+│   └── 03_lightgbm_final.ipynb   # LightGBM — final model
+├── assets/
+│   └── pipeline_diagram.svg      # Pipeline architecture diagram
+├── requirements.txt              # Python dependencies
+├── LICENSE                       # MIT license
+├── .gitignore
+├── README.md
+├── train.csv                     # Training data (not included — see Kaggle competition)
+├── test.csv                      # Test data (not included — see Kaggle competition)
+├── sample_submission.csv         # Submission format reference
+└── submission.csv                # Final predictions
 ```
 
 ## How to Run
 
-1. Place `train.csv`, `test.csv`, and `sample_submission.csv` in the input directory (the notebook auto-detects paths under `/kaggle/input`, adjust for local runs)
-2. Run the notebook top to bottom
-3. `submission.csv` is generated with `ID` and predicted `label` columns
+1. Clone this repo and install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Download `train.csv`, `test.csv`, and `sample_submission.csv` from the [Kaggle competition page](https://www.kaggle.com/competitions/comment-category-prediction-challenge) and place them in the input directory (notebooks auto-detect paths under `/kaggle/input` on Kaggle; adjust `DATA_PATH` for local runs)
+3. Run each notebook top to bottom
+4. `submission.csv` is generated with `ID` and predicted `label` columns
 
 ## Future Improvements
 
@@ -136,3 +158,7 @@ The model performs strongly on the majority classes (0 and 2) and reasonably on 
 - Broader hyperparameter search for LightGBM itself (Optuna) rather than only tuning the weaker baselines
 - SMOTE or focal loss as alternatives to class-weight balancing for the minority classes
 - Cross-validation instead of a single hold-out split for a more robust F1 estimate
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
