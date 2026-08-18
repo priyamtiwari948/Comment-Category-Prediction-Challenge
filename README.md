@@ -126,21 +126,20 @@ The model performs strongly on the majority classes (0 and 2) and reasonably on 
 ## Project Structure
 
 ```
-├── notebooks/
-│   ├── 01_naive_bayes.ipynb      # Naive Bayes baseline + tuning
-│   ├── 02_sgd.ipynb              # SGD classifier baseline + tuning
-│   └── 03_lightgbm_final.ipynb   # LightGBM — final model
+├── Models/
+│   ├── naive_bayes_notebook.ipynb    # Naive Bayes baseline + tuning
+│   ├── sgd_notebook.ipynb            # SGD classifier baseline + tuning
+│   └── lightgbm_notebook.ipynb       # LightGBM — final model
 ├── assets/
-│   └── pipeline_diagram.svg      # Pipeline architecture diagram
-├── requirements.txt              # Python dependencies
-├── LICENSE                       # MIT license
+│   └── pipeline_diagram.svg          # Pipeline architecture diagram
+├── Comment_Category_Prediction.ipynb # Original full pipeline (EDA + all 3 models in one notebook)
+├── requirements.txt                  # Python dependencies
+├── LICENSE                           # MIT license
 ├── .gitignore
-├── README.md
-├── train.csv                     # Training data (not included — see Kaggle competition)
-├── test.csv                      # Test data (not included — see Kaggle competition)
-├── sample_submission.csv         # Submission format reference
-└── submission.csv                # Final predictions
+└── README.md
 ```
+
+> Note: `train.csv`, `test.csv`, and `sample_submission.csv` are not included in this repo — download them from the [Kaggle competition page](https://www.kaggle.com/competitions/comment-category-prediction-challenge).
 
 ## How to Run
 
@@ -149,7 +148,7 @@ The model performs strongly on the majority classes (0 and 2) and reasonably on 
    pip install -r requirements.txt
    ```
 2. Download `train.csv`, `test.csv`, and `sample_submission.csv` from the [Kaggle competition page](https://www.kaggle.com/competitions/comment-category-prediction-challenge) and place them in the input directory (notebooks auto-detect paths under `/kaggle/input` on Kaggle; adjust `DATA_PATH` for local runs)
-3. Run each notebook top to bottom
+3. Run `Comment_Category_Prediction.ipynb` for the full end-to-end pipeline (EDA → feature engineering → all 3 models → submission), **or** run individual notebooks from `Models/` if you only want a specific model
 4. `submission.csv` is generated with `ID` and predicted `label` columns
 
 ## Future Improvements
