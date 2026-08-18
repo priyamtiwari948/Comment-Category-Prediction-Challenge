@@ -1,5 +1,7 @@
 # Comment Category Prediction Challenge
 
+**Kaggle Competition:** [comment-category-prediction-challenge](https://www.kaggle.com/competitions/comment-category-prediction-challenge)
+
 A machine learning pipeline that classifies online comments into one of four platform-defined handling categories, using text content, engagement signals, and metadata. Built as a Kaggle-style competition submission, evaluated on **Macro F1**. Three model families were trained and compared, with the best baseline selected as the final model.
 
 ## Overview
